@@ -513,3 +513,13 @@ function SOHL:Run_Script(id_strings, them, id, element, instigator, delay)
 	}
 	return self.Run_Script_Data[id_strings]
 end
+
+function SOHL:_heist_pos()
+	if self.Enable == "SR" or self.Enable == "MS" then
+		return self.Enable
+	elseif self.Enable == "CS" then
+		return "MS"
+	else
+		return "SR"
+	end
+end

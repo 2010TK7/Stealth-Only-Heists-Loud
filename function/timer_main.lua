@@ -37,14 +37,6 @@ function SOHL:Timer_Main()
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
 			for _, unit in pairs(World:find_units_quick("all", 1)) do
-				if unit:interaction() then
-					local interact_types = tostring(unit:interaction().tweak_data)
-					if interact_types == "pick_lock_easy_no_skill" or
-						interact_types == "open_from_inside" or
-						interact_types == "pick_lock_hard_no_skill" then
-						unit:interaction():interact(managers.player:player_unit())
-					end
-				end
 				for k, v in pairs (self.Unit_Remove_When_Loud[self.Enable] or {}) do
 					if v.key == unit:name():key() then
 						for _, pos in pairs(v.position) do
@@ -72,7 +64,7 @@ function SOHL:Timer_Main()
 			local _all_enemies = managers.enemy:all_enemies() or {}
 			local _Spawning = self._Spawning or {}
 			local _Spawning_Total = self._Spawning_Total or {}
-			local _Spawn_Settings_List = self.Spawn_Settings_List[self.Enable] or self.Spawn_Settings_List.SR
+			local _Spawn_Settings_List = self.Spawn_Settings_List[self:_heist_pos()]
 			local _T = table.size(_Spawn_Settings_List)
 			local _C = _Spawning[_D]
 			local _total_enemies = table.size(_all_enemies)
@@ -109,7 +101,7 @@ function SOHL:Timer_Main()
 			end
 			if _enemy_type_amount["sniper"] < self._Spawning_Other_Total["sniper"][_D] then
 
-				local _pos_sniper = self.Spawning_Other.sniper[self.Enable] or self.Spawning_Other.sniper.SR
+				local _pos_sniper = self.Spawning_Other.sniper[self:_heist_pos()]
 				self:_full_function_spawn(
 					Idstring("units/pd2_dlc_drm/characters/ene_zeal_swat_heavy_sniper/ene_zeal_swat_heavy_sniper"),
 					_pos_sniper[math.random(#_pos_sniper)], Rotation(0, 0, 1)
@@ -129,7 +121,7 @@ function SOHL:Timer_Main()
 				medic = self.Spawning_Other.medic
 			}						
 			local _list
-			local _pos_other = self.Spawning_Other.pos_default[self.Enable] or self.Spawning_Other.pos_default.SR
+			local _pos_other = self.Spawning_Other.pos_default[self:_heist_pos()]
 			for _type, _data in pairs(_other) do
 				_type = tostring(_type)
 				_list = _data.name
@@ -171,7 +163,7 @@ end
 
 function SOHL:Spawn_Group(_R)
 	local _S = {}
-	local _Spawn_Settings = self.Spawn_Settings[self.Enable] or self.Spawn_Settings.SR
+	local _Spawn_Settings = self.Spawn_Settings[self:_heist_pos()]
 	_S = _Spawn_Settings[_R] or {}
 	if _S and _S.enemy then
 		local _enemy = _S.enemy[_D] or {}
