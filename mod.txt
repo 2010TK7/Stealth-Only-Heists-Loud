@@ -3,7 +3,7 @@
 	"description": "5 stealth only heists loud in 1 mod",
 	"author": "Dr_Newbie / SenpaiKillerFire / TK7",
 	"contact": "",
-	"version": "0.3_b",
+	"version": "0.4_b",
 	"blt_version": 2,
 	"hooks": [
 		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/timer_main.lua"},

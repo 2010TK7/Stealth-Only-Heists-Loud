@@ -372,6 +372,28 @@ SOHL.Time4Use = {
 	Spawn_Settings.MS.other_003.position = _other_position.MS
 	Spawn_Settings.MS.other_003.POSNOADD = true
 	table.insert(Spawn_Settings_List.MS, "other_003")
+
+	Spawn_Settings.CS = {}
+	Spawn_Settings_List.CS = {}
+	_other_position.CS = {Vector3(-4475, 4903, -175), Vector3(-4475, -5298, -175), Vector3(2521, -1708, 574)}
+	Spawn_Settings.CS.TK7 = {
+		group_id = 1,
+		position = _other_position.CS,
+		rotation = {Rotation(0, 0, 1)},
+		enemy = _default_enemy
+	}
+	table.insert(Spawn_Settings_List.CS, "TK7")
+
+	Spawn_Settings.TY = {}
+	Spawn_Settings_List.TY = {}
+	_other_position.TY = {
+		Vector3(-1118, 1550, -798), Vector3(0, 700, -1013), Vector3(6, 2361, 0),
+		Vector3(677, -1233, 0), Vector3(-2, -2535, 2.6), Vector3(4, 1483, 400),
+		Vector3(-505, -5620, -729), Vector3(505, -5620, -729), Vector3(0, 4975, -400)
+	}
+	Spawn_Settings.TY.TK7 = deep_clone(Spawn_Settings.CS.TK7)
+	Spawn_Settings.TY.TK7.position = _other_position.TY
+	table.insert(Spawn_Settings_List.TY, "TK7")
 	
 	SOHL.Spawn_Settings = deep_clone(Spawn_Settings)
 	SOHL.Spawn_Settings_List = Spawn_Settings_List
@@ -402,7 +424,9 @@ SOHL.Time4Use = {
 				Vector3(-3177, 2682, 606),
 				Vector3(-3208, 2248, 605),
 				Vector3(-3230, 1937, 604)
-			}
+			},
+			CS = {},
+			TY = {}
 		},
 		taser = {amount = 1, name = {Idstring("units/payday2/characters/ene_tazer_1/ene_tazer_1")}},
 		shield = {amount = 3, name = {Idstring("units/payday2/characters/ene_shield_2/ene_shield_2")}},
@@ -447,6 +471,8 @@ SOHL.Time4Use = {
 
 	SOHL.Spawning_Other.pos_default.SR = {}
 	SOHL.Spawning_Other.pos_default.MS = {}
+	SOHL.Spawning_Other.pos_default.CS = {}
+	SOHL.Spawning_Other.pos_default.TY = {}
 	for k, _ in pairs(SOHL.Spawn_Settings) do
 		for _, v in pairs(SOHL.Spawn_Settings[k]) do
 			if not v.POSNOADD then
@@ -515,10 +541,8 @@ function SOHL:Run_Script(id_strings, them, id, element, instigator, delay)
 end
 
 function SOHL:_heist_pos()
-	if self.Enable == "SR" or self.Enable == "MS" then
+	if self.Spawn_Settings[self.Enable] then
 		return self.Enable
-	elseif self.Enable == "CS" then
-		return "MS"
 	else
 		return "SR"
 	end
