@@ -9,7 +9,7 @@ local _heist_ID = {
 	dark = "MS",
 	cage = "CS",
 	fish = "TY"
-	--,tag = "BF"
+	,tag = "BF"
 }
 
 local _mission_init_orig = MissionManager.init

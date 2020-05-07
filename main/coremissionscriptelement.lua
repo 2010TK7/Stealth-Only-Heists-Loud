@@ -36,6 +36,15 @@ function MissionScriptElement:on_executed(instigator, ...)
 					table.insert(SOHL.Spawning_Other.sniper.CS, v)
 				end
 			end
+		elseif SOHL.Enable == "BF" and not managers.groupai:state():whisper_mode() then
+			if _id == "id_100655" then
+				local element = self:get_mission_element(100654)
+				if element then
+					SOHL.Run_Script_Data["id_100655"] = SOHL:Run_Script("id_100654", self, 100654, element, instigator, 1)
+				end
+			elseif _id == "id_101968" then
+				self._values.enabled = false
+			end
 		end
 	end
 	SOHL.OpenVault(self, instigator, ...)

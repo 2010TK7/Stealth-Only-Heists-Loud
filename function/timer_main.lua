@@ -36,6 +36,12 @@ function SOHL:Timer_Main()
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
+			for _, data in pairs(managers.enemy:all_enemies()) do
+				if data.unit:name() == Idstring("units/pd2_dlc_tag/characters/ene_male_commissioner/ene_male_commissioner") then
+					data.unit:set_slot(0)
+					managers.network:session():send_to_peers_synched( "remove_unit", data.unit )
+				end
+			end
 		end
 		--Go loud
 		if self.Timer_Enable and self.Delay_Timer < _nowtime and self.Go_Loud_Stage == 1 then
