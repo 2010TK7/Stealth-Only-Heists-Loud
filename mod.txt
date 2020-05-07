@@ -3,7 +3,7 @@
 	"description": "4 stealth only heists (exclude Breaking fed) loud in 1 mod",
 	"author": "TK7 (original code by Dr_Newbie)",
 	"contact": "https://steamcommunity.com/id/2010TK7",
-	"version": "0.7_pb",
+	"version": "0.8_pb",
 	"blt_version": 2,
 	"hooks": [
 		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/timer_main.lua"},

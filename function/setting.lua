@@ -7,32 +7,6 @@ _G.SOHL = _G.SOHL or {}
 SOHL.Message2OtherPlayers = "This lobby is running 'Stealth Only Heists Loud Mod'"
 SOHL.Message2WarnYou = "You're activating Stealth Only Heists Loud MOD. \n You should only play with your friends."
 
-SOHL.Unit_Remove_When_Loud = {
-	MS = {
-		{
-			key = "b025e83ed6d542b4",
-			position = {
-				Vector3(3041, 749.998, -700),
-				Vector3(1041, 749.999, -700),
-				Vector3(-158, 749.998, -700),
-				Vector3(-2558, 750, -700),
-				Vector3(-2500, 4400, -700),
-				Vector3(-900, 4400, -700),
-				Vector3(2200, 4400, -700),
-				Vector3(2600, 4400, -700),
-				Vector3(2641, 749.998, -700),
-				Vector3(300, 4400, -700)
-			}
-		},
-		{
-			key = "23390d90d6ed7e76",
-			position = {
-				Vector3(0, 0, 0)
-			}
-		}
-	}
-}
-
 SOHL.Time2FirstSpawn = {
 	normal = 60,
 	hard = 60,
@@ -384,6 +358,7 @@ SOHL.Time4Use = {
 		group_id = 1,
 		position = _other_position.CS,
 		rotation = {Rotation(0, 0, 1)},
+		POSNOADD = ture,
 		enemy = _default_enemy
 	}
 	table.insert(Spawn_Settings_List.CS, "TK7")
@@ -393,11 +368,23 @@ SOHL.Time4Use = {
 	_other_position.TY = {
 		Vector3(-1118, 1550, -798), Vector3(0, 700, -1013), Vector3(6, 2361, 0),
 		Vector3(677, -1233, 0), Vector3(-2, -2535, 2.6), Vector3(4, 1483, 400),
-		Vector3(-505, -5620, -729), Vector3(505, -5620, -729), Vector3(0, 4975, -400)
+		Vector3(-505, -5620, -729), Vector3(505, -5620, -729)
 	}
 	Spawn_Settings.TY.TK7 = deep_clone(Spawn_Settings.CS.TK7)
 	Spawn_Settings.TY.TK7.position = _other_position.TY
 	table.insert(Spawn_Settings_List.TY, "TK7")
+
+	Spawn_Settings.BF = {}
+	Spawn_Settings_List.BF = {}
+	_other_position.BF = {
+		Vector3(4675, 3025, 700), Vector3(4725, 525, 750), Vector3(1475, 2900, 700),
+		Vector3(858, 1036.5, 300), Vector3(1582, 2418, 300), Vector3(-1150, -75, 700),
+		Vector3(-1816, 394, 1100), Vector3(556, -3347, 1100), Vector3(-1118, -2348, 700),
+		Vector3(466, 1571, 700)
+	}
+	Spawn_Settings.BF.TK7 = deep_clone(Spawn_Settings.CS.TK7)
+	Spawn_Settings.BF.TK7.position = _other_position.BF
+	table.insert(Spawn_Settings_List.BF, "TK7")
 	
 	SOHL.Spawn_Settings = deep_clone(Spawn_Settings)
 	SOHL.Spawn_Settings_List = Spawn_Settings_List
@@ -430,7 +417,8 @@ SOHL.Time4Use = {
 				Vector3(-3230, 1937, 604)
 			},
 			CS = {},
-			TY = {}
+			TY = {},
+			BF = {}
 		},
 		taser = {amount = 1, name = {Idstring("units/payday2/characters/ene_tazer_1/ene_tazer_1")}},
 		shield = {amount = 3, name = {Idstring("units/payday2/characters/ene_shield_2/ene_shield_2")}},
@@ -477,6 +465,7 @@ SOHL.Time4Use = {
 	SOHL.Spawning_Other.pos_default.MS = {}
 	SOHL.Spawning_Other.pos_default.CS = {}
 	SOHL.Spawning_Other.pos_default.TY = {}
+	SOHL.Spawning_Other.pos_default.BF = {}
 	for k, _ in pairs(SOHL.Spawn_Settings) do
 		for _, v in pairs(SOHL.Spawn_Settings[k]) do
 			if not v.POSNOADD then
@@ -515,7 +504,9 @@ function SOHL:_full_function_spawn(name, pos, rot, delay)
 		end
 		local _player_unit = {}
 		for _, data in pairs(managers.groupai:state():all_criminals() or {}) do
-			table.insert(_player_unit, data.unit)
+			if not data.is_deployable then
+				table.insert(_player_unit, data.unit)
+			end
 		end
 		local _final_unit_to_use = _player_unit[math.random(table.size(_player_unit))] or {}
 		local new_objective = {

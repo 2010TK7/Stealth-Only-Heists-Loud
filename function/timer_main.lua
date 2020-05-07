@@ -36,22 +36,6 @@ function SOHL:Timer_Main()
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
-			for _, unit in pairs(World:find_units_quick("all", 1)) do
-				for k, v in pairs (self.Unit_Remove_When_Loud[self.Enable] or {}) do
-					if type(unit) == "table" and v.key == unit:name():key() then
-						for _, pos in pairs(v.position) do
-							if unit:position() == pos then
-								unit:set_slot(0)
-								managers.network:session():send_to_peers_synched( "remove_unit", unit )
-							end
-						end
-						if v.position and v.position[1] == Vector3(0, 0, 0) then
-							unit:set_slot(0)
-							managers.network:session():send_to_peers_synched( "remove_unit", unit )	
-						end
-					end
-				end
-			end
 		end
 		--Go loud
 		if self.Timer_Enable and self.Delay_Timer < _nowtime and self.Go_Loud_Stage == 1 then
