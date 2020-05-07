@@ -38,7 +38,7 @@ function SOHL:Timer_Main()
 			self.Go_Loud_Stage = 1
 			for _, unit in pairs(World:find_units_quick("all", 1)) do
 				for k, v in pairs (self.Unit_Remove_When_Loud[self.Enable] or {}) do
-					if v.key == unit:name():key() then
+					if type(unit) == "table" and v.key == unit:name():key() then
 						for _, pos in pairs(v.position) do
 							if unit:position() == pos then
 								unit:set_slot(0)

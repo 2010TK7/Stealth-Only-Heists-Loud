@@ -510,6 +510,9 @@ function SOHL:_full_function_spawn(name, pos, rot, delay)
 	delay = delay or 1
 	local _nowslot = math.random(1, 100)
 	DelayedCalls:Add("DelayedCalls_SOHL_full_function_spawn_" .. _nowslot, delay, function()
+		if not SOHL or SOHL.Checker then
+			return
+		end
 		local _player_unit = {}
 		for _, data in pairs(managers.groupai:state():all_criminals() or {}) do
 			table.insert(_player_unit, data.unit)

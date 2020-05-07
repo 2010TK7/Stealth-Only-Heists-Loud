@@ -15,15 +15,17 @@ local _heist_ID = {
 local _mission_init_orig = MissionManager.init
 function MissionManager:init(...)
 	_mission_init_orig(self, ...)
-	if Network:is_client() then
+	if Network:is_client() or not SOHL then
 		return
 	end
-	if SOHL then
-		if Global.game_settings and _heist_ID[Global.game_settings.level_id] and not SOHL.Checker then
-			SOHL.Enable = _heist_ID[Global.game_settings.level_id]
-		else
-			SOHL.Enable = nil
-			SOHL.Checker = nil
+	if SOHL.Checker then
+		SOHL.Checker = nil
+	elseif Global.game_settings then
+		SOHL.Enable = _heist_ID[Global.game_settings.level_id]
+		if not SOHL.Enable then
+			SOHL.Checker = true
 		end
+	else
+		SOHL.Enable = nil
 	end
 end

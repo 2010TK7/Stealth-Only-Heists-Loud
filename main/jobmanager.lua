@@ -10,7 +10,7 @@ local NewFunc = function()
 	if Network:is_client() then
 		return
 	end
-	if SOHL then
+	if SOHL and (SOHL.Enable or not SOHL.Checker) then
 		SOHL.Enable = nil
 		SOHL.Checker = true
 	end
