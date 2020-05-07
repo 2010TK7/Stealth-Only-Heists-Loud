@@ -17,11 +17,11 @@ local NewFunc = function()
 end
 
 function JobManager:_on_retry_job_stage()
-	OldFunc1(self)
 	NewFunc()
+	OldFunc1(self)
 end
 
 function JobManager:deactivate_current_job()
-	OldFunc2(self)
 	NewFunc()
+	OldFunc2(self)
 end

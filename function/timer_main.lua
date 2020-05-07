@@ -69,22 +69,15 @@ function SOHL:Timer_Main()
 			local _C = _Spawning[_D]
 			local _total_enemies = table.size(_all_enemies)
 			local _enemy_type_amount = {}
-			local _Killed_by_System = 0
 			for _, data in pairs(_all_enemies) do
 				local enemyType = tostring(data.unit:base()._tweak_table)
-				if math.random(1, 9) == 5 then
-					data.unit:set_slot(0)
-					managers.network:session():send_to_peers_synched( "remove_unit", data.unit )
-					_Killed_by_System = _Killed_by_System + 1
+				if not _enemy_type_amount[enemyType] then
+					_enemy_type_amount[enemyType] = 1
 				else
-					if not _enemy_type_amount[enemyType] then
-						_enemy_type_amount[enemyType] = 1
-					else
-						_enemy_type_amount[enemyType] = _enemy_type_amount[enemyType] + 1
-					end
+					_enemy_type_amount[enemyType] = _enemy_type_amount[enemyType] + 1
 				end
 			end
-			if _total_enemies - _Killed_by_System < _Spawning_Total[_D] then
+			if _total_enemies < _Spawning_Total[_D] then
 				local _Last_R
 				for i = 1, _C do
 					local _R = _Spawn_Settings_List[math.random(_T)]
@@ -173,7 +166,7 @@ function SOHL:Spawn_Group(_R)
 			local _id = _S.group_id or nil
 			if _pos and _rot and _id then
 				local k = 1
-				for j = 1, (_S.enemy.amount and #_pos and math.max(_S.enemy.amount, #_pos) or 0) do
+				for j = 1, (_S.enemy.amount and #_pos and math.max(_S.enemy.amount, #_pos) or _S.enemy.amount or #_pos or 0) do
 					if k > #_pos then k = 1 end
 					self:_full_function_spawn(Idstring(_S.enemy[_D][math.random(#_S.enemy[_D])]), _pos[k], rot, j*2)
 					if j <= 3 then

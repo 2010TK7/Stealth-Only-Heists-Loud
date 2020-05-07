@@ -376,7 +376,7 @@ SOHL.Time4Use = {
 	Spawn_Settings.CS = {}
 	Spawn_Settings_List.CS = {}
 	_other_position.CS = {
-		Vector3(-4475, 4903, -175), Vector3(-4475, -5298, -175), Vector3(2521, -1708, 574),
+		Vector3(-4475, 4903, -175), Vector3(-4475, -5298, -175),
 		Vector3(2846, -1300, -225), Vector3(2450, -1136, 575), Vector3(2275, 1400, -225),
 		Vector3(197, -3870, -178), Vector3(-616, 2000, -175)
 	}
@@ -506,7 +506,7 @@ function set_team(unit)
 	unit:movement():set_team(AIState:team_data(team_id))
 end
 
-function SOHL:_full_function_spawn(name, pos, rot, delay, stance)
+function SOHL:_full_function_spawn(name, pos, rot, delay)
 	delay = delay or 1
 	local _nowslot = math.random(1, 100)
 	DelayedCalls:Add("DelayedCalls_SOHL_full_function_spawn_" .. _nowslot, delay, function()
@@ -525,7 +525,6 @@ function SOHL:_full_function_spawn(name, pos, rot, delay, stance)
 		local _u = World:spawn_unit(name, pos, rot)
 		set_team(_u)
 		_u:brain():set_spawn_ai( { init_state = "idle", params = { scan = true }, objective = new_objective } )
-		_u:brain():action_request( { type = "act", body_part = 1, variant = "idle", align_sync = true } )
 		_u:brain():on_reload()
 		_u:movement():set_character_anim_variables()
 	end)
