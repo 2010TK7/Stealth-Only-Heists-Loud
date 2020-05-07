@@ -22,28 +22,29 @@ function MissionScriptElement:on_executed(instigator, ...)
 				SOHL.Run_Script_Data["id_100962"] = _tmp
 			end
 		elseif SOHL.Enable == "CS" and _id == "id_105035" then
-			if managers.groupai:state():whisper_mode() then
+			if not SOHL.Timer_Enable then
 				SOHL.Enable = nil
 				SOHL.Checker = true
 			else
-				local pos = {
-					Vector3(-13737.5, 20035, -754), Vector3(-16656, 22542, -767), Vector3(-18606, 31793, -774),
-					Vector3(-8613, 38628, -264), Vector3(1719, 43850, -276)
-				}
-				for _, v in pairs(pos) do
-					table.insert(SOHL.Spawn_Settings.CS.TK7.position, v)
-					table.insert(SOHL.Spawning_Other.pos_default.CS, v)
+				table.insert(SOHL.Spawn_Settings_List.CS, "Plus")
+				for _, v in pairs(SOHL.Spawn_Settings_List.CS.Plus.position) do
 					table.insert(SOHL.Spawning_Other.sniper.CS, v)
+					table.insert(SOHL.Spawning_Other.pos_default.CS, v)
 				end
 			end
-		elseif SOHL.Enable == "BF" and not managers.groupai:state():whisper_mode() then
+		elseif SOHL.Enable == "BF" then
 			if _id == "id_100655" then
 				local element = self:get_mission_element(100654)
 				if element then
-					SOHL.Run_Script_Data["id_100655"] = SOHL:Run_Script("id_100654", self, 100654, element, instigator, 1)
+					SOHL._skip_obj_table = {
+						self = self,
+						element = element,
+						instigator = instigator
+					}
+					SOHL._skip_obj_func()
 				end
-			elseif _id == "id_101968" then
-				self._values.enabled = false
+			elseif _id == "id_100654" then
+				SOHL._skip_obj_table = nil
 			end
 		end
 	end

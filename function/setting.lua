@@ -5,7 +5,7 @@ end
 _G.SOHL = _G.SOHL or {}
 
 SOHL.Message2OtherPlayers = "This lobby is running 'Stealth Only Heists Loud Mod'"
-SOHL.Message2WarnYou = "You're activating Stealth Only Heists Loud MOD. \n You should only play with your friends."
+SOHL.Message2WarnYou = "You're activating Stealth Only Heists Loud MOD. \n You should play with your friends."
 
 SOHL.Time2FirstSpawn = {
 	normal = 60,
@@ -358,10 +358,18 @@ SOHL.Time4Use = {
 		group_id = 1,
 		position = _other_position.CS,
 		rotation = {Rotation(0, 0, 1)},
-		POSNOADD = ture,
+		POSNOADD = true,
 		enemy = _default_enemy
 	}
 	table.insert(Spawn_Settings_List.CS, "TK7")
+	Spawn_Settings.CS.Plus = deep_clone(Spawn_Settings.CS.TK7)
+	Spawn_Settings.CS.Plus.group_id = 2
+	Spawn_Settings.CS.Plus.position = {
+		Vector3(-13737.5, 20035, -754), Vector3(-16656, 22542, -767), Vector3(-18606, 31793, -774),
+		Vector3(-8613, 38628, -264), Vector3(1719, 43850, -276), Vector3(-5116, 38611, -266), Vector3(-2778, 54339, -270)
+	}
+	Spawn_Settings.CS.Plus.rotation = {Rotation(180, 0, 1)}
+	Spawn_Settings.CS.Plus.POSNOADD = true
 
 	Spawn_Settings.TY = {}
 	Spawn_Settings_List.TY = {}
@@ -372,6 +380,7 @@ SOHL.Time4Use = {
 	}
 	Spawn_Settings.TY.TK7 = deep_clone(Spawn_Settings.CS.TK7)
 	Spawn_Settings.TY.TK7.position = _other_position.TY
+	Spawn_Settings.TY.TK7.POSNOADD = true
 	table.insert(Spawn_Settings_List.TY, "TK7")
 
 	Spawn_Settings.BF = {}
@@ -384,6 +393,7 @@ SOHL.Time4Use = {
 	}
 	Spawn_Settings.BF.TK7 = deep_clone(Spawn_Settings.CS.TK7)
 	Spawn_Settings.BF.TK7.position = _other_position.BF
+	Spawn_Settings.BF.TK7.POSNOADD = true
 	table.insert(Spawn_Settings_List.BF, "TK7")
 	
 	SOHL.Spawn_Settings = deep_clone(Spawn_Settings)
@@ -542,5 +552,21 @@ function SOHL:_heist_pos()
 		return self.Enable
 	else
 		return "SR"
+	end
+end
+
+function SOHL._skip_obj_func()
+	if not SOHL or SOHL.Checker then
+		return
+	end
+	if SOHL._skip_obj_table then
+		if SOHL.Timer_Enable then
+			SOHL.Run_Script_Data["id_100655"] = SOHL:Run_Script("id_100654", SOHL._skip_obj_table.self, 100654, SOHL._skip_obj_table.element, SOHL._skip_obj_table.instigator, 0)
+			SOHL._skip_obj_table = nil
+		else
+			DelayedCalls:Add("DelayedCalls_Skip_Obj", 1, SOHL._skip_obj_func)
+		end
+	else
+		DelayedCalls:Remove("DelayedCalls_Skip_Obj")
 	end
 end

@@ -31,17 +31,14 @@ function SOHL:Timer_Main()
 	--Mission start
 	if isPlaying() and self and self.Enable then
 		--Init
-		if not self.Timer_Enable and not managers.groupai:state():whisper_mode() then
+		if not self.Timer_Enable and (not managers.groupai:state():whisper_mode() or managers.groupai:state()._point_of_no_return_timer) then
+			if managers.groupai:state():whisper_mode() then
+				managers.groupai:state():on_police_called("empty")
+			end
 			self.Timer_Enable = true
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
-			for _, data in pairs(managers.enemy:all_enemies()) do
-				if data.unit:name() == Idstring("units/pd2_dlc_tag/characters/ene_male_commissioner/ene_male_commissioner") then
-					data.unit:set_slot(0)
-					managers.network:session():send_to_peers_synched( "remove_unit", data.unit )
-				end
-			end
 		end
 		--Go loud
 		if self.Timer_Enable and self.Delay_Timer < _nowtime and self.Go_Loud_Stage == 1 then
