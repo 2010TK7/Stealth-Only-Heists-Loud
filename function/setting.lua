@@ -554,19 +554,3 @@ function SOHL:_heist_pos()
 		return "SR"
 	end
 end
-
-function SOHL._skip_obj_func()
-	if not SOHL or SOHL.Checker then
-		return
-	end
-	if SOHL._skip_obj_table then
-		if SOHL.Timer_Enable then
-			SOHL.Run_Script_Data["id_100655"] = SOHL:Run_Script("id_100654", SOHL._skip_obj_table.self, 100654, SOHL._skip_obj_table.element, SOHL._skip_obj_table.instigator, 0)
-			SOHL._skip_obj_table = nil
-		else
-			DelayedCalls:Add("DelayedCalls_Skip_Obj", 1, SOHL._skip_obj_func)
-		end
-	else
-		DelayedCalls:Remove("DelayedCalls_Skip_Obj")
-	end
-end

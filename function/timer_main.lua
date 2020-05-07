@@ -31,14 +31,26 @@ function SOHL:Timer_Main()
 	--Mission start
 	if isPlaying() and self and self.Enable then
 		--Init
-		if not self.Timer_Enable and (not managers.groupai:state():whisper_mode() or managers.groupai:state()._point_of_no_return_timer) then
-			if managers.groupai:state():whisper_mode() then
-				managers.groupai:state():on_police_called("empty")
-			end
+		if managers.groupai:state():whisper_mode() and managers.groupai:state()._point_of_no_return_timer then
+			managers.groupai:state():on_police_called("empty")
+		end
+		if not self.Timer_Enable and not managers.groupai:state():whisper_mode() then
 			self.Timer_Enable = true
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
+		end
+		if self.Timer_Enable then
+			for k, v in pairs(SOHL._skip_obj_table or {}) do
+				local _tmp = SOHL:Run_Script("id_" .. tostring(v.id), v.self, v.id, v.element, v.instigator, v.delay or 0)
+				for _, _id in pairs(v.to or {}) do
+					SOHL.Run_Script_Data[_id] = _tmp
+				end
+				for _, func in pairs(v.extra or {}) do
+					func()
+				end
+				SOHL._skip_obj_table[k] = nil
+			end
 		end
 		--Go loud
 		if self.Timer_Enable and self.Delay_Timer < _nowtime and self.Go_Loud_Stage == 1 then
