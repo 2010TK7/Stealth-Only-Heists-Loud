@@ -142,7 +142,7 @@ function SOHL:Timer_Main()
 	end
 	--Repeat
 	DelayedCalls:Add("DelayedCalls_SOHL_Timer_Main", 1, function()
-		if self then
+		if self and not self.Checker then
 			self:Timer_Main()
 		end
 	end)
@@ -173,7 +173,7 @@ function SOHL:Spawn_Group(_R)
 			local _id = _S.group_id or nil
 			if _pos and _rot and _id then
 				local k = 1
-				for j = 1, (_S.enemy.amount or 0) do
+				for j = 1, (_S.enemy.amount and #_pos and math.max(_S.enemy.amount, #_pos) or 0) do
 					if k > #_pos then k = 1 end
 					self:_full_function_spawn(Idstring(_S.enemy[_D][math.random(#_S.enemy[_D])]), _pos[k], rot, j*2)
 					if j <= 3 then

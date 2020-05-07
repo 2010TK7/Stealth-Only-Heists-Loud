@@ -7,7 +7,7 @@ _G.SOHL = _G.SOHL or {}
 SOHL = _G.SOHL
 SOHL.Run_Script_Data = SOHL.Run_Script_Data or {}
 
-local SOHL_OpenVault = MissionScriptElement.on_executed
+SOHL.OpenVault = SOHL.OpenVault or MissionScriptElement.on_executed
 
 function MissionScriptElement:on_executed(instigator, ...)
 	local _id = "id_" .. tostring(self._id)
@@ -23,5 +23,5 @@ function MissionScriptElement:on_executed(instigator, ...)
 			end
 		end
 	end
-	SOHL_OpenVault(self, instigator, ...)
+	SOHL.OpenVault(self, instigator, ...)
 end
