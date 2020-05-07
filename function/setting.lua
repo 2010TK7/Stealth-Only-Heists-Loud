@@ -383,10 +383,10 @@ SOHL.Time4Use = {
 	Spawn_Settings.BF = {}
 	Spawn_Settings_List.BF = {}
 	_other_position.BF = {
-		Vector3(4675, 3025, 700), Vector3(4725, 525, 750), Vector3(1475, 2900, 700),
+		Vector3(4675, 3025, 700), Vector3(4753, 218, 750), Vector3(1475, 2900, 700),
 		Vector3(858, 1036.5, 300), Vector3(1582, 2418, 300), Vector3(-1150, -75, 700),
 		Vector3(-1816, 394, 1100), Vector3(556, -3347, 1100), Vector3(-1118, -2348, 700),
-		Vector3(466, 1571, 700)
+		Vector3(466, 1571, 700), Vector3(2419, 2126, 700)
 	}
 	Spawn_Settings.BF.TK7 = deep_clone(Spawn_Settings.CS.TK7)
 	Spawn_Settings.BF.TK7.position = _other_position.BF
@@ -542,6 +542,12 @@ function SOHL:Run_Script(id_strings, them, id, element, instigator, delay)
 		delay = delay + 0.1 + self.Now_Time
 	}
 	return self.Run_Script_Data[id_strings]
+end
+
+function SOHL:Run_Extra(id_strings, func)
+	self.Run_Extra_Func = self.Run_Extra_Func or {}
+	self.Run_Extra_Func[id_strings] = func
+	return self.Run_Extra_Func[id_strings]
 end
 
 function SOHL:_heist_pos()

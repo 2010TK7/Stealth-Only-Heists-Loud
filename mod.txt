@@ -3,7 +3,7 @@
 	"description": "5 stealth only heists loud in 1 mod",
 	"author": "TK7 (original code by Dr_Newbie)",
 	"contact": "https://steamcommunity.com/id/2010TK7",
-	"version": "0.9.2_pb",
+	"version": "0.9.3_b",
 	"blt_version": 2,
 	"hooks": [
 		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/loc.lua"},

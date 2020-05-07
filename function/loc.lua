@@ -2,12 +2,12 @@ _G.SOHL = _G.SOHL or {}
 
 if SystemInfo:language():key() == Idstring("schinese"):key() then
 	SOHL.Lang = {
-		warn = "【警告】即将进入强攻阶段",
-		vault1 = "【提示】金库将在 ",
+		warn = "[警告] 即将进入强攻阶段",
+		vault1 = "[提示] 金库将在 ",
 		vault2 = " 秒后开启",
-		garbage1 = "【提示】已移除仓库门垃圾箱",
-		garbage2 = "【提示】已移除西院墙垃圾箱",
-		garbage3 = "【提示】已移除江边垃圾箱"
+		garbage1 = "[提示] 已移除仓库门垃圾箱",
+		garbage2 = "[提示] 已移除西院墙垃圾箱",
+		garbage3 = "[提示] 已移除江边垃圾箱"
 	}
 else
 	SOHL.Lang = {

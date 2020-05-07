@@ -25,6 +25,13 @@ function MissionBriefingGui:flash_ready()
 end
 
 function SOHL:Timer_Main()
+	--Repeat
+	DelayedCalls:Add("DelayedCalls_SOHL_Timer_Main", 1, function()
+		if self and not self.Checker then
+			self:Timer_Main()
+		end
+	end)
+
 	local _nowtime = math.floor(TimerManager:game():time())
 	local _start_time = self.Start_Time or 0
 	self.Now_Time = _nowtime
@@ -34,27 +41,13 @@ function SOHL:Timer_Main()
 		if managers.groupai:state():whisper_mode() and managers.groupai:state()._point_of_no_return_timer then
 			managers.groupai:state():on_police_called("empty")
 		end
-		if not self.Timer_Enable and not managers.groupai:state():whisper_mode() then
+		if not self.Timer_Enable and not managers.groupai:state():whisper_mode() and not self.Checker then
 			self.Timer_Enable = true
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
 			if self.Enable ~= "BF" then
-				SOHL:Announce(SOHL.Lang.warn)
-			end
-		end
-		if self.Timer_Enable then
-			for k, v in pairs(SOHL._skip_obj_table or {}) do
-				if v.element then
-					for _, func in pairs(v.extra or {}) do
-						func()
-					end
-					local _tmp = SOHL:Run_Script("id_" .. tostring(v.id), v.self, v.id, v.element, v.instigator, v.delay or 0)
-					for _, _id in pairs(v.to or {}) do
-						SOHL.Run_Script_Data[_id] = _tmp
-					end
-				end
-				SOHL._skip_obj_table[k] = nil
+				self:Announce(self.Lang.warn)
 			end
 		end
 		--Go loud
@@ -137,13 +130,11 @@ function SOHL:Timer_Main()
 			math.randomseed(tostring(os.time()):reverse():sub(1, 6))
 		end
 	end
-	--Repeat
-	DelayedCalls:Add("DelayedCalls_SOHL_Timer_Main", 1, function()
-		if self and not self.Checker then
-			self:Timer_Main()
+	if self.Timer_Enable then
+		for k, v in pairs(self.Run_Extra_Func or {}) do
+			v()
+			self.Run_Extra_Func[k] = nil
 		end
-	end)
-	if self.Run_Script_Data then
 		for k, v in pairs(self.Run_Script_Data or {}) do
 			if v and type(v.delay) == "number" and _nowtime > v.delay then
 				local them = v.them
