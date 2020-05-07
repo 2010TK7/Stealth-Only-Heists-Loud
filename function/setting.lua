@@ -170,7 +170,7 @@ SOHL.Time4Use = {
 			"units/pd2_dlc_gitgud/characters/ene_zeal_swat/ene_zeal_swat",
 			"units/pd2_dlc_gitgud/characters/ene_zeal_swat_heavy/ene_zeal_swat_heavy"
 		},
-		amount = 7			
+		amount = 7
 	}
 	_default_enemy.hard = _default_enemy.normal
 	_default_enemy.overkill_145 = _default_enemy.overkill
@@ -182,7 +182,6 @@ SOHL.Time4Use = {
 
 	Spawn_Settings.SR = {}
 	Spawn_Settings_List.SR = {}
-	--SR
 	Spawn_Settings.SR.front_right_side_group = {
 		group_id = 1,
 		position = {Vector3(3872, 2750, 978), Vector3(3872, 2850, 978), Vector3(3872, 2950, 978), Vector3(3872, 3050, 978), Vector3(3872, 3150, 978)},
@@ -193,7 +192,9 @@ SOHL.Time4Use = {
 
 	Spawn_Settings.SR.warehouse_top = deep_clone(Spawn_Settings.SR.front_right_side_group)
 	Spawn_Settings.SR.warehouse_top.group_id = 2
-	Spawn_Settings.SR.warehouse_top.position = {Vector3(-2200, -4950, 1775), Vector3(-2100, -4950, 1775), Vector3(-2000, -4950, 1775), Vector3(-1900, -4950, 1775), Vector3(-1800, -4950, 1775)}
+	Spawn_Settings.SR.warehouse_top.position = {
+		Vector3(-2200, -4950, 1775), Vector3(-2100, -4950, 1775), Vector3(-2000, -4950, 1775), Vector3(-1900, -4950, 1775), Vector3(-1800, -4950, 1775)
+	}
 	table.insert(Spawn_Settings_List.SR, "warehouse_top")
 	
 	Spawn_Settings.SR.front_left_side_group = deep_clone(Spawn_Settings.SR.front_right_side_group)
@@ -203,12 +204,16 @@ SOHL.Time4Use = {
 	
 	Spawn_Settings.SR.warehouse_back = deep_clone(Spawn_Settings.SR.front_right_side_group)
 	Spawn_Settings.SR.warehouse_back.group_id = 4
-	Spawn_Settings.SR.warehouse_back.position = {Vector3(-2844, -5328, 1377.29), Vector3(-2850, -5500, 1377.29), Vector3(-2850, -5414, 1377.29), Vector3(-2850, -5550, 1377.29)}
+	Spawn_Settings.SR.warehouse_back.position = {
+		Vector3(-2844, -5328, 1377.29), Vector3(-2850, -5500, 1377.29), Vector3(-2850, -5414, 1377.29), Vector3(-2850, -5550, 1377.29)
+	}
 	table.insert(Spawn_Settings_List.SR, "warehouse_back")
 	
 	Spawn_Settings.SR.front_front_group = deep_clone(Spawn_Settings.SR.front_right_side_group)
 	Spawn_Settings.SR.front_front_group.group_id = 5
-	Spawn_Settings.SR.front_front_group.position = {Vector3(4692, -3000, 975.941), Vector3(4692, -2900, 975.941), Vector3(4692, -2800, 975.941), Vector3(4692, -2700, 975.941), Vector3(4692, -2600, 975.941)}
+	Spawn_Settings.SR.front_front_group.position = {
+		Vector3(4692, -3000, 975.941), Vector3(4692, -2900, 975.941), Vector3(4692, -2800, 975.941), Vector3(4692, -2700, 975.941), Vector3(4692, -2600, 975.941)
+	}
 	table.insert(Spawn_Settings_List.SR, "front_front_group")
 	
 	Spawn_Settings.SR.warehouse_roof_001 = deep_clone(Spawn_Settings.SR.front_right_side_group)
@@ -277,11 +282,9 @@ SOHL.Time4Use = {
 	Spawn_Settings.SR.other_005.position = _other_position.SR
 	Spawn_Settings.SR.other_005.POSNOADD = true
 	table.insert(Spawn_Settings_List.SR, "other_005")
-	--SR end
 
 	Spawn_Settings.MS = {}
 	Spawn_Settings_List.MS = {}
-	--MS
 	Spawn_Settings.MS.palce_1 = {
 		group_id = 1,
 		position = {Vector3(3202.7, 586.491, -700.008), Vector3(3098.97, 515.575, -700.007), Vector3(3105.69, 664.135, -700.009)},
@@ -369,7 +372,6 @@ SOHL.Time4Use = {
 	Spawn_Settings.MS.other_003.position = _other_position.MS
 	Spawn_Settings.MS.other_003.POSNOADD = true
 	table.insert(Spawn_Settings_List.MS, "other_003")
-	--MS end
 	
 	SOHL.Spawn_Settings = deep_clone(Spawn_Settings)
 	SOHL.Spawn_Settings_List = Spawn_Settings_List
@@ -381,7 +383,7 @@ SOHL.Time4Use = {
 --Spawning_Other
 	SOHL.Spawning_Other = {
 		sniper = {
-			pos = {
+			SR = {
 				Vector3(-1650, -5375, 1775),
 				Vector3(-1650, -5275, 1775),
 				Vector3(-23175, 7200, 1100),
@@ -406,7 +408,10 @@ SOHL.Time4Use = {
 		shield = {amount = 3, name = {Idstring("units/payday2/characters/ene_shield_2/ene_shield_2")}},
 		spooc = {amount = 1, name = {Idstring("units/payday2/characters/ene_spook_1/ene_spook_1")}},
 		tank = {amount = 1, name = {Idstring("units/payday2/characters/ene_bulldozer_1/ene_bulldozer_1")}},
-		medic = {amount = 2, name = {Idstring("units/payday2/characters/ene_medic_r870/ene_medic_r870"), Idstring("units/payday2/characters/ene_medic_m4/ene_medic_m4")}},
+		medic = {amount = 2, name = {
+			Idstring("units/payday2/characters/ene_medic_r870/ene_medic_r870"),
+			Idstring("units/payday2/characters/ene_medic_m4/ene_medic_m4")
+		}},
 		
 		pos_default = {}
 	}
@@ -430,24 +435,32 @@ SOHL.Time4Use = {
 		if _D == "overkill_145" or _D == "easy_wish" or _D == "overkill_290" then
 			table.insert(SOHL.Spawning_Other.tank.name, Idstring("units/payday2/characters/ene_bulldozer_2/ene_bulldozer_2"))
 			if _D == "overkill_290" then
-				table.insert(SOHL.Spawning_Other.tank.name, Idstring("units/payday2/characters/ene_bulldozer_3/ene_bulldozer_3"))
-				table.insert(SOHL.Spawning_Other.tank.name, Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_minigun_classic/ene_bulldozer_minigun_classic"))
+				table.insert(SOHL.Spawning_Other.tank.name,
+					Idstring("units/payday2/characters/ene_bulldozer_3/ene_bulldozer_3")
+				)
+				table.insert(SOHL.Spawning_Other.tank.name,
+					Idstring("units/pd2_dlc_drm/characters/ene_bulldozer_minigun_classic/ene_bulldozer_minigun_classic")
+				)
 			end
 		end
 	end
 
-	for _, v in pairs(SOHL.Spawn_Settings[SOHL.Enable] or SOHL.Spawn_Settings.SR) do
-		if not v.POSNOADD then
-			for _, pos in pairs(v.position) do
-				table.insert(SOHL.Spawning_Other.pos_default, pos)
-				table.insert(SOHL.Spawning_Other.sniper.pos, pos)
+	SOHL.Spawning_Other.pos_default.SR = {}
+	SOHL.Spawning_Other.pos_default.MS = {}
+	for k, _ in pairs(SOHL.Spawn_Settings) do
+		for _, v in pairs(SOHL.Spawn_Settings[k]) do
+			if not v.POSNOADD then
+				for _, pos in pairs(v.position) do
+					table.insert(SOHL.Spawning_Other.pos_default[k], pos)
+					table.insert(SOHL.Spawning_Other.sniper[k], pos)
+				end
 			end
 		end
-	end	
-	
-	for _, v in pairs(_other_position[SOHL.Enable] or _other_position.SR) do
-		table.insert(SOHL.Spawning_Other.sniper.pos, v)
-		table.insert(SOHL.Spawning_Other.pos_default, v)
+
+		for _, v in pairs(_other_position[k]) do
+			table.insert(SOHL.Spawning_Other.sniper[k], v)
+			table.insert(SOHL.Spawning_Other.pos_default[k], v)
+		end
 	end
 	
 	_other_position = {}

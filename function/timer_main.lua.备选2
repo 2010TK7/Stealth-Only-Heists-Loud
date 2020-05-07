@@ -140,7 +140,7 @@ function SOHL:Timer_Main()
 					for i = 1, _data.amount do
 						self:_full_function_spawn(
 							_list[math.random(#_list)],
-							_pos_other[math.random(#_pos_other)], Rotation(0, 0, 1), _AFTER_GROUP_TOTAL_DELAY + i
+							_pos_other[math.random(#_pos_other)], Rotation(0, 0, 1), i
 						)
 					end
 				end
@@ -184,9 +184,7 @@ function SOHL:Spawn_Group(_R)
 				for j = 1, (_S.enemy.amount or 0) do
 					if k > #_pos then k = 1 end
 					self:_full_function_spawn(Idstring(_S.enemy[_D][math.random(#_S.enemy[_D])]), _pos[k], rot, j*2)
-					if j <= 3 then
-						_AFTER_GROUP_TOTAL_DELAY = _AFTER_GROUP_TOTAL_DELAY + j*2
-					end
+					_AFTER_GROUP_TOTAL_DELAY = _AFTER_GROUP_TOTAL_DELAY + j*2
 					k = k + 1
 				end
 			end

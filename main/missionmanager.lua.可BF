@@ -19,6 +19,8 @@ function MissionManager:init(...)
 			SOHL.Enable = "CS"
 		elseif Global.game_settings.level_id == "fish" then
 			SOHL.Enable = "TY"
+		elseif Global.game_settings.level_id == "tag" then
+			SOHL.Enable = "BF"
 		else
 			SOHL.Enable = nil
 		end

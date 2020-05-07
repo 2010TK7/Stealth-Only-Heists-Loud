@@ -181,12 +181,10 @@ function SOHL:Spawn_Group(_R)
 			local _id = _S.group_id or nil
 			if _pos and _rot and _id then
 				local k = 1
-				for j = 1, (_S.enemy.amount or 0) do
+				for j = 1, 3 do
 					if k > #_pos then k = 1 end
 					self:_full_function_spawn(Idstring(_S.enemy[_D][math.random(#_S.enemy[_D])]), _pos[k], rot, j*2)
-					if j <= 3 then
-						_AFTER_GROUP_TOTAL_DELAY = _AFTER_GROUP_TOTAL_DELAY + j*2
-					end
+					_AFTER_GROUP_TOTAL_DELAY = _AFTER_GROUP_TOTAL_DELAY + j*2
 					k = k + 1
 				end
 			end
