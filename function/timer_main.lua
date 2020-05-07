@@ -39,15 +39,20 @@ function SOHL:Timer_Main()
 			self.Start_Time = _nowtime
 			self.Delay_Timer = _nowtime + self.Time4Use.FirstSpawn
 			self.Go_Loud_Stage = 1
+			if self.Enable ~= "BF" then
+				SOHL:Announce(SOHL.Lang.warn)
+			end
 		end
 		if self.Timer_Enable then
 			for k, v in pairs(SOHL._skip_obj_table or {}) do
-				local _tmp = SOHL:Run_Script("id_" .. tostring(v.id), v.self, v.id, v.element, v.instigator, v.delay or 0)
-				for _, _id in pairs(v.to or {}) do
-					SOHL.Run_Script_Data[_id] = _tmp
-				end
-				for _, func in pairs(v.extra or {}) do
-					func()
+				if v.element then
+					for _, func in pairs(v.extra or {}) do
+						func()
+					end
+					local _tmp = SOHL:Run_Script("id_" .. tostring(v.id), v.self, v.id, v.element, v.instigator, v.delay or 0)
+					for _, _id in pairs(v.to or {}) do
+						SOHL.Run_Script_Data[_id] = _tmp
+					end
 				end
 				SOHL._skip_obj_table[k] = nil
 			end

@@ -4,9 +4,6 @@ end
 
 _G.SOHL = _G.SOHL or {}
 
-SOHL.Message2OtherPlayers = "This lobby is running 'Stealth Only Heists Loud Mod'"
-SOHL.Message2WarnYou = "You're activating Stealth Only Heists Loud MOD. \n You should play with your friends."
-
 SOHL.Time2FirstSpawn = {
 	normal = 60,
 	hard = 60,

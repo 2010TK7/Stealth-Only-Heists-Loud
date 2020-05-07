@@ -15,6 +15,7 @@ function GroupAIStateBase:_update_point_of_no_return(...)
 					data.unit:set_slot(0)
 					managers.network:session():send_to_peers_synched( "remove_unit", data.unit )
 					garrett = true
+					SOHL:Announce(SOHL.Lang.warn)
 				end
 			end
 		end

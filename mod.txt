@@ -3,18 +3,17 @@
 	"description": "5 stealth only heists loud in 1 mod",
 	"author": "TK7 (original code by Dr_Newbie)",
 	"contact": "https://steamcommunity.com/id/2010TK7",
-	"version": "0.9.1_pb",
+	"version": "0.9.2_pb",
 	"blt_version": 2,
 	"hooks": [
-		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/timer_main.lua"},
+		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/loc.lua"},
 		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/setting.lua"},
-		{"hook_id": "lib/managers/missionmanager", "script_path": "main/missionmanager.lua"},
+		{"hook_id": "lib/managers/localizationmanager", "script_path": "function/timer_main.lua"},
+		{"hook_id": "core/lib/managers/mission/coremissionscriptelement", "script_path": "main/coremissionscriptelement.lua"},
 		{"hook_id": "lib/managers/group_ai_states/groupaistatebase", "script_path": "main/groupaistatebase.lua"},
 		{"hook_id": "lib/managers/group_ai_states/groupaistatebesiege", "script_path": "main/groupaistatebesiege.lua"},
-		{"hook_id": "lib/managers/menumanagerpd2", "script_path": "lobby/menumanagerpd2.lua"},
 		{"hook_id": "lib/managers/jobmanager", "script_path": "main/jobmanager.lua"},
-		{"hook_id": "lib/network/handlers/unitnetworkhandler", "script_path": "lobby/unitnetworkhandler.lua"},
-		{"hook_id": "core/lib/managers/mission/coremissionscriptelement", "script_path": "main/coremissionscriptelement.lua"},
+		{"hook_id": "lib/managers/missionmanager", "script_path": "main/missionmanager.lua"},
 		{"hook_id": "lib/tweak_data/levelstweakdata", "script_path": "main/levelstweakdata.lua"}
 	],
 	"updates": [
